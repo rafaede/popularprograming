@@ -12,7 +12,7 @@ type Data struct {
 	Address string `json:"address"`
 }
 
-func abc(w http.ResponseWriter, r *http.Request) {
+func handler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.Error(w, "404 PAGE NOT FOUND", http.StatusNotFound)
 		return
@@ -40,9 +40,6 @@ func abc(w http.ResponseWriter, r *http.Request) {
 	}
 }
 func main() {
-	http.HandleFunc("/", abc)
-
-	// Start server
-	fmt.Println("Server started at http://localhost:8080")
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	http.HandleFunc("/", handler)
+	log.Fatal(http.ListenAndServe(":2000", nil))
 }
